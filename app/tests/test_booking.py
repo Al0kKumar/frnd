@@ -1,12 +1,16 @@
 import sys
 import os
-from datetime import date
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+from fastapi.testclient import TestClient
+from app.main import app
+from datetime import date
 import pytest
 from app.models.hotel import Hotel
 from app.models.room import Room
 from app.models.booking import Booking
 from app.core.database import SessionLocal, Base, engine
+
+client = TestClient(app)
 
 # db table ssetup
 Base.metadata.create_all(bind=engine)
